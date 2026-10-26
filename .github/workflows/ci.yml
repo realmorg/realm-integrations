@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+
+jobs:
+  stacks:
+    runs-on: ubuntu-latest
+    outputs:
+      list: ${{ steps.list.outputs.list }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list
+        run: echo "list=$(ls -d */ | sed 's#/##' | grep -v -e shared -e node_modules | while read d; do [ -f "$d/Dockerfile" ] && echo "$d"; done | jq -R . | jq -cs .)" >> "$GITHUB_OUTPUT"
+
+  check:
+    needs: stacks
+    if: needs.stacks.outputs.list != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        stack: ${{ fromJson(needs.stacks.outputs.list) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm install && npx playwright install --with-deps chromium
+      - run: docker build -t example ${{ matrix.stack }}
+      - run: docker run -d --name example -p 8000:8000 example
+      - name: Wait for the server
+        run: for i in $(seq 1 60); do curl -fs http://localhost:8000/ >/dev/null && exit 0; sleep 2; done; docker logs example; exit 1
+      - run: node shared/check.mjs http://localhost:8000/
+      - if: failure()
+        run: docker logs example
