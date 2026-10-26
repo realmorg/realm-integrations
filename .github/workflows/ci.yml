@@ -36,6 +36,6 @@ jobs:
       - run: docker run -d --name example -p 8000:8000 example
       - name: Wait for the server
         run: for i in $(seq 1 60); do curl -fs http://localhost:8000/ >/dev/null && exit 0; sleep 2; done; docker logs example; exit 1
-      - run: node shared/check.mjs http://localhost:8000/
+      - run: node shared/check.mjs http://localhost:8000/ ${{ matrix.stack }}
       - if: failure()
         run: docker logs example

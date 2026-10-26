@@ -28,8 +28,10 @@ CI builds every folder and runs `shared/check.mjs` against it in Chromium. The c
 
 ```sh
 npm install
-node shared/check.mjs http://localhost:8000/
+node shared/check.mjs http://localhost:8000/ django
 ```
+
+Static site generators (Hugo, Eleventy, Jekyll) have no server to post to. Their folder has a `check.json` with `{ "form": false }`, and their guide shows how to send the form to a backend or a form service instead.
 
 ## Licence
 

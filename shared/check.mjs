@@ -1,10 +1,17 @@
 // Checks one running example: the REALM component upgraded with the server's data, and the
 // REALM UI form posted through the stack's own form handling.
 //
-//   node shared/check.mjs http://localhost:8000/ [expected-name] [expected-plan]
+//   node shared/check.mjs http://localhost:8000/ [folder]
+//
+// A folder may hold check.json with { "form": false } when its stack has no server to post to
+// (static site generators); the check then stops after the component.
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { chromium } from "playwright";
 
-const [url = "http://localhost:8000/", name = "Ada Lovelace", plan = "Pro"] = process.argv.slice(2);
+const [url = "http://localhost:8000/", folder] = process.argv.slice(2);
+const config = folder && existsSync(join(folder, "check.json")) ? JSON.parse(readFileSync(join(folder, "check.json"), "utf8")) : {};
+const { name = "Ada Lovelace", plan = "Pro", form = true } = config;
 const email = "ada@example.com";
 
 const browser = await chromium.launch();
@@ -22,6 +29,11 @@ try {
   if (!text.includes(name)) throw new Error(`<user-card> does not show the name "${name}": ${text.trim()}`);
   if (!text.includes(plan)) throw new Error(`<user-card> does not show the plan "${plan}": ${text.trim()}`);
 
+  if (!form) {
+    if (errors.length) throw new Error(`Console errors:\n${errors.join("\n")}`);
+    console.log(`ok ${url} (component only)`);
+    process.exit(0);
+  }
   await page.locator("ui-input[name=email] input").fill(email);
   await Promise.all([page.waitForNavigation(), page.locator("form [type=submit]").first().click()]);
   const body = await page.locator("body").innerText();
