@@ -1,0 +1,15 @@
+{{template "head"}}
+<h1>Account</h1>
+
+<user-card name="{{.Name}}" plan="{{.Plan}}"></user-card>
+
+<section id="team">
+  <ui-button variant="outline" hx-get="/team" hx-target="#team" hx-swap="innerHTML">Show team</ui-button>
+</section>
+
+<form method="post" action="/subscribe">
+  <ui-label for="email">Email</ui-label>
+  <ui-input id="email" name="email" type="email" autocomplete="email" required></ui-input>
+  <ui-button type="submit">Subscribe</ui-button>
+</form>
+{{template "foot"}}

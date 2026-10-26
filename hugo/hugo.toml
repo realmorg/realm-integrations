@@ -1,0 +1,7 @@
+baseURL = "http://localhost:8000/"
+languageCode = "en"
+title = "REALM in Hugo"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
+
+[params]
+  subscribeAction = "https://example.com/subscribe"
