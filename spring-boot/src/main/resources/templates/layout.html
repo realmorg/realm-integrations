@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${title}">Account</title>
+  <link rel="stylesheet" href="https://realm.js.org/dist/realm.css">
+  <link rel="stylesheet" href="https://realm.js.org/dist/ui/theme.css">
+  <script type="module" src="https://realm.js.org/dist/realm.js"></script>
+  <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+  <th:block th:fragment="imports">
+    <import-element th:attr="from=@{/components/user-card.html}"></import-element>
+    <import-element from="https://realm.js.org/dist/ui/components/field.html"></import-element>
+    <import-element from="https://realm.js.org/dist/ui/components/input.html"></import-element>
+    <import-element from="https://realm.js.org/dist/ui/components/label.html"></import-element>
+    <import-element from="https://realm.js.org/dist/ui/components/button.html"></import-element>
+  </th:block>
+</body>
+</html>

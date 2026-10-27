@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+main {
+  display: grid;
+  gap: calc(var(--spacing) * 6);
+  max-width: calc(var(--spacing) * 120);
+  margin-inline: auto;
+  padding: calc(var(--spacing) * 10) calc(var(--spacing) * 4);
+}
+
+h1 {
+  margin: 0;
+  font-size: var(--text-2xl);
+}
+
+form {
+  display: grid;
+  gap: calc(var(--spacing) * 4);
+  justify-items: start;
+}
+
+form ui-field {
+  justify-self: stretch;
+}
+
+nav {
+  display: flex;
+  gap: calc(var(--spacing) * 4);
+  max-width: calc(var(--spacing) * 120);
+  margin-inline: auto;
+  padding: calc(var(--spacing) * 4) calc(var(--spacing) * 4) 0;
+}
+
+turbo-frame {
+  display: grid;
+  gap: calc(var(--spacing) * 4);
+}

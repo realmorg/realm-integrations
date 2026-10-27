@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://realm.js.org/dist/realm.css">
+  <link rel="stylesheet" href="https://realm.js.org/dist/ui/theme.css">
+  <script type="module" src="https://realm.js.org/dist/realm.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', path='app.css') }}">
+</head>
+<body>
+  <import-element from="{{ url_for('static', path='components/user-card.html') }}"></import-element>
+  <import-element from="https://realm.js.org/dist/ui/components/field.html"></import-element>
+  <import-element from="https://realm.js.org/dist/ui/components/input.html"></import-element>
+  <import-element from="https://realm.js.org/dist/ui/components/label.html"></import-element>
+  <import-element from="https://realm.js.org/dist/ui/components/button.html"></import-element>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

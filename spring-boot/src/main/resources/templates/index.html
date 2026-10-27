@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Account')}"></head>
+<body>
+  <th:block th:replace="~{layout :: imports}"></th:block>
+  <main>
+    <h1>Account</h1>
+
+    <user-card th:attr="name=${user.name},plan=${user.plan}"></user-card>
+
+    <form method="post" th:action="@{/subscribe}">
+      <ui-field>
+        <ui-label for="email">Email</ui-label>
+        <ui-input id="email" name="email" type="email" required></ui-input>
+      </ui-field>
+      <ui-button type="submit">Subscribe</ui-button>
+    </form>
+  </main>
+</body>
+</html>
