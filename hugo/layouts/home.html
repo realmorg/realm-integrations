@@ -1,0 +1,9 @@
+{{ define "main" }}
+  {{ .Content }}
+
+  <form method="post" action="{{ site.Params.subscribeAction }}">
+    <ui-label for="email">Email</ui-label>
+    <ui-input id="email" name="email" type="email" autocomplete="email" required></ui-input>
+    <ui-button type="submit">Subscribe</ui-button>
+  </form>
+{{ end }}

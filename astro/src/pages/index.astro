@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const user = { name: "Ada Lovelace", plan: "Pro" };
+---
+<Layout>
+  <h1>Account</h1>
+
+  <user-card name={user.name} plan={user.plan}></user-card>
+
+  <form method="post" action="/subscribe">
+    <ui-label for="email">Email</ui-label>
+    <ui-input id="email" name="email" type="email" autocomplete="email" required></ui-input>
+    <ui-button type="submit">Subscribe</ui-button>
+  </form>
+</Layout>

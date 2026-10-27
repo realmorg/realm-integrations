@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+if (Astro.request.method !== "POST") return Astro.redirect("/");
+
+const data = await Astro.request.formData();
+const email = String(data.get("email") ?? "");
+---
+<Layout title="Subscribed">
+  <h1>Thanks</h1>
+
+  <p>Subscribed: {email}</p>
+  <p><a href="/">Back</a></p>
+</Layout>

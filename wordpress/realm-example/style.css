@@ -1,0 +1,29 @@
+/*
+Theme Name: REALM example
+Description: Loads REALM and REALM UI, renders a REALM component with data from WordPress, and posts a REALM UI form to admin-post.php.
+Version: 1.0.0
+Requires at least: 6.5
+License: MIT
+*/
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+main {
+  display: grid;
+  gap: calc(var(--spacing) * 4);
+  max-width: calc(var(--spacing) * 120);
+  margin: 0 auto;
+  padding: calc(var(--spacing) * 8) calc(var(--spacing) * 4);
+}
+form {
+  display: grid;
+  gap: calc(var(--spacing) * 2);
+  justify-items: start;
+}
+form ui-input {
+  justify-self: stretch;
+}

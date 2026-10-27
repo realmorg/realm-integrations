@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Account</h1>
+
+<user-card name="{{ user.name }}" plan="{{ user.plan }}"></user-card>
+
+<form method="post" action="{% url 'subscribe' %}">
+  {% csrf_token %}
+  <ui-label for="email">Email</ui-label>
+  <ui-input id="email" name="email" type="email" value="{{ form.email.value|default:'' }}" autocomplete="email" required{% if form.email.errors %} invalid{% endif %}></ui-input>
+  {% if form.email.errors %}<p role="alert">{{ form.email.errors.0 }}</p>{% endif %}
+  <ui-button type="submit">Subscribe</ui-button>
+</form>
+{% endblock %}

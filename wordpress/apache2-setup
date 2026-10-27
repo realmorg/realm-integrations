@@ -1,0 +1,11 @@
+#!/bin/bash
+# Runs after the official entrypoint has copied WordPress into /var/www/html.
+# wp runs as www-data so Apache can write the SQLite database it creates.
+set -e
+wp() { runuser -u www-data -- /usr/local/bin/wp "$@"; }
+if ! wp core is-installed 2>/dev/null; then
+  wp core install --url="http://localhost:8000" --title="REALM example" \
+    --admin_user=admin --admin_password="$(openssl rand -hex 12)" --admin_email=admin@example.com --skip-email
+  wp theme activate realm-example
+fi
+exec apache2-foreground
