@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Account</h1>
+
+  <user-card name="{{ user.name }}" plan="{{ user.plan }}"></user-card>
+
+  <form method="post">
+    {{ form_widget(form._token) }}
+    <ui-field>
+      <ui-label for="email">Email</ui-label>
+      <ui-input id="email" name="{{ field_name(form.email) }}" value="{{ field_value(form.email) }}" type="email" required></ui-input>
+    </ui-field>
+    {% for error in form.vars.errors %}
+      <p>{{ error.message }}</p>
+    {% endfor %}
+    <ui-button type="submit">Subscribe</ui-button>
+  </form>
+{% endblock %}

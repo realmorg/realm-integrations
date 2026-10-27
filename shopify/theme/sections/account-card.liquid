@@ -1,0 +1,29 @@
+{% render 'user-card' %}
+
+<h1>{{ section.settings.heading | escape }}</h1>
+
+{% if customer %}
+  <user-card
+    name="{{ customer.name | escape }}"
+    plan="{{ customer.metafields.custom.plan.value | default: 'Free' | escape }}"
+  ></user-card>
+{% endif %}
+
+{% form 'customer', data-shopify-captcha: "true" %}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  <ui-field>
+    <ui-label for="email-{{ section.id }}">Email</ui-label>
+    <ui-input id="email-{{ section.id }}" name="contact[email]" type="email" required></ui-input>
+  </ui-field>
+  <ui-button type="submit">Subscribe</ui-button>
+{% endform %}
+
+{% schema %}
+{
+  "name": "Account card",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Account" }
+  ],
+  "presets": [{ "name": "Account card" }]
+}
+{% endschema %}

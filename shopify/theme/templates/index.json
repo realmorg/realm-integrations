@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "account": {
+      "type": "account-card",
+      "settings": { "heading": "Account" }
+    }
+  },
+  "order": ["account"]
+}

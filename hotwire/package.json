@@ -1,0 +1,17 @@
+{
+  "name": "realm-hotwire",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "csrf-sync": "4.2.1",
+    "ejs": "7.0.2",
+    "express": "5.3.0",
+    "express-session": "1.19.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

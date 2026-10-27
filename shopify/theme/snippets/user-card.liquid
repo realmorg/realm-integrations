@@ -1,0 +1,25 @@
+<import-element from="https://realm.js.org/dist/ui/components/card.html"></import-element>
+<import-element from="https://realm.js.org/dist/ui/components/badge.html"></import-element>
+
+<custom-element name="user-card">
+  <script type="realm">
+    const props = defineProps({
+      name: prop.string(),
+      plan: prop.string().default("Free"),
+    });
+  </script>
+
+  <style type="realm">
+    :host {
+      display: block;
+    }
+  </style>
+
+  <ui-card>
+    <ui-card-header>
+      <ui-card-title><slot name="@name"></slot></ui-card-title>
+      <ui-card-description>Signed in</ui-card-description>
+      <ui-card-action><ui-badge variant="secondary"><slot name="@plan"></slot></ui-badge></ui-card-action>
+    </ui-card-header>
+  </ui-card>
+</custom-element>

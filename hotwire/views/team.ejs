@@ -1,0 +1,9 @@
+<%- include("partials/head", { title: "Team" }) %>
+    <h1>Team</h1>
+
+    <turbo-frame id="team">
+      <% for (const member of team) { %>
+        <user-card name="<%= member.name %>" plan="<%= member.plan %>"></user-card>
+      <% } %>
+    </turbo-frame>
+<%- include("partials/foot") %>
